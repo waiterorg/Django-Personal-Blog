@@ -22,5 +22,11 @@ class Article(models.Model):
     updated = models.DateTimeField(auto_now=True,verbose_name='بروز رسانی شده')
     status = models.CharField(max_length= 1,choices=STATUS_CHOICES,verbose_name='وضعیت')
 
+    class Meta:
+         verbose_name = 'مقاله'
+         verbose_name_plural = 'مقالات'
+    
     def __str__(self):
         return self.title
+
+    
