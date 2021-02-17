@@ -29,6 +29,6 @@ class Article(models.Model):
         return self.title
 
     def jpublish(self):
-        return self.publish
+        return jalali_converter(self.publish)
 
     
