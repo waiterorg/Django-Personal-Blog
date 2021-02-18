@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-from blog.extensions.utils import jalali_converter
+from extensions.utils import jalali_converter
 
 
 # Create your models here.
