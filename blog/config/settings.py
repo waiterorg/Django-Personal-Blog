@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'extensions',
     # apps
     'blog.apps.BlogConfig',
+    'blog_setting.apps.BlogSettingConfig'
 
 ]
 
