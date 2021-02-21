@@ -1,22 +1,11 @@
 {% extends 'shared/base.html' %}
+{% load render_partial %}
+
 
 {% block main %}
 
-
   <!-- Page Header -->
-  <header class="masthead" style="background-image: url('img/home-bg.jpg')">
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-          <div class="site-heading">
-            <h1>وبلاگ ویتر</h1>
-            <span class="subheading">این وبلاگ ویتر هست و میتونی توش چیز میز بخونی !</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
+{% render_partial 'settings:header' %}
 
 <div class="container">
   <div class="row">

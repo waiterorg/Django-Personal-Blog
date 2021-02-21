@@ -1,5 +1,9 @@
 from django.contrib import admin
-from .models import settings
+from .models import Settings
 # Register your models here.
 
-admin.site.register(settings)
+class SettingAdmin(admin.ModelAdmin):
+    list_display = ('name','active')
+
+
+admin.site.register(Settings, SettingAdmin)

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'extensions',
+    'django_render_partial',
     # apps
     'blog.apps.BlogConfig',
     'blog_setting.apps.BlogSettingConfig'
