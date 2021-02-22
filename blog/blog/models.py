@@ -10,9 +10,6 @@ class CategoryManager(models.Manager):
         active = Category.objects.filter(status=True)
         return active
     
-    def get_published_article(self):
-        published = Category.articles.filter(status='p') 
-        return published
 
 
 class Category(models.Model):
@@ -29,6 +26,12 @@ class Category(models.Model):
     def __str__(self):
         return self.title
 
+
+class ArticleManager(models.Manager):
+
+    def get_published_article(self):
+        published = Article.objects.filter(status='p') 
+        return published
 
 
 
@@ -48,7 +51,7 @@ class Article(models.Model):
     created = models.DateTimeField(auto_now_add=True,verbose_name='ساخته شده')
     updated = models.DateTimeField(auto_now=True,verbose_name='بروز رسانی شده')
     status = models.CharField(max_length= 1,choices=STATUS_CHOICES,verbose_name='وضعیت')
-    
+    objects = ArticleManager()
 
     class Meta:
          verbose_name = 'مقاله'
