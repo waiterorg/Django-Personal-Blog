@@ -5,10 +5,14 @@ from extensions.utils import jalali_converter
 
 # Create your models here.
 class CategoryManager(models.Manager):
+    
     def get_active_category(self):
         active = Category.objects.filter(status=True)
         return active
-
+    
+    def get_published_article(self):
+        published = Category.articles.filter(status='p') 
+        return published
 
 
 class Category(models.Model):
@@ -37,7 +41,7 @@ class Article(models.Model):
 
     title = models.CharField(max_length = 150, verbose_name='عنوان')
     slug = models.SlugField(max_length= 150, unique = True , verbose_name='ادرس لینک')
-    category = models.ManyToManyField(Category,related_name='category',verbose_name='دسته بندی')
+    category = models.ManyToManyField(Category,related_name='articles',verbose_name='دسته بندی')
     description = models.TextField(verbose_name='توضیحات')
     thumpnail = models.ImageField(upload_to = 'blog-images',verbose_name='تصویر')
     publish = models.DateTimeField(default = timezone.now,verbose_name='منتشر شده')
