@@ -24,6 +24,11 @@
             <p class="post-meta">نوشته شده توسط
               <a href="#"> ویتر</a>
               {{ article.jpublish }}</p>
+              <div>
+                {% for category in article.category.get_active_category %}
+                  <a href="{% url 'blog:CategoryView' category.slug %}">#{{ category.title }} </a> 
+                {% endfor %}
+              </div>
           </div>
           <hr>
         {% endfor %}
