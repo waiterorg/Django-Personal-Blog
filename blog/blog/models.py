@@ -4,13 +4,19 @@ from extensions.utils import jalali_converter
 
 
 # Create your models here.
+class CategoryManager(models.Manager):
+    def get_active_category(self):
+        active = Category.objects.filter(status=True)
+        return active
+
+
 
 class Category(models.Model):
     title = models.CharField(max_length=150, verbose_name='عنوان دسته بندی')
     slug = models.SlugField(max_length=150, unique=True, verbose_name='ادرس دسته بندی')
     status = models.BooleanField(default=True, verbose_name='آیا نمایش داده شود؟')
     position = models.IntegerField(default=0, verbose_name='پوزیشن')
-
+    objects = CategoryManager()
     class Meta:
         verbose_name='دسته بندی'
         verbose_name_plural='دسته بندی ها'
@@ -43,6 +49,7 @@ class Article(models.Model):
     class Meta:
          verbose_name = 'مقاله'
          verbose_name_plural = 'مقالات'
+         ordering = ['-publish']
     
     def __str__(self):
         return self.title
