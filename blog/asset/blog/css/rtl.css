@@ -43,7 +43,6 @@ header.masthead .site-heading h1 {
     font-family: Sahel;
 }
 
-*, ::after, ::before {
-    box-sizing: border-box;
-    font-family: Sahel;
+#mainNav {
+    font-family: 'Sahel';
 }
