@@ -1,0 +1,65 @@
+{% extends 'shared/base.html' %}
+{% load render_partial %}
+
+
+{% block main %}
+
+  <!-- Page Header -->
+{% render_partial 'settings:header' %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+
+        {% for article in object_list %}
+          <div class="post-preview">
+            <a href="{% url 'blog:articledetail' article.slug %}">
+              <h2 class="post-title">
+                {{article.title}}
+              </h2>
+              <h3 class="post-subtitle text-justify">
+              {{ article.description|truncatewords:100 }}
+              </h3>
+            </a>
+            <p class="post-meta">نوشته شده توسط
+              <a href="#"> ویتر</a>
+              {{ article.jpublish }}</p>
+              <div>
+                {% for category in article.category.get_active_category %}
+                  <a href="{% url 'blog:CategoryView' category.slug %}">#{{ category.title }} </a> 
+                {% endfor %}
+              </div>
+          </div>
+          <hr>
+        {% endfor %}
+
+      <!-- Pager -->
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          {% if page_obj.has_previous %}
+          <li class="page-item"><a class="page-link" href="{% url 'blog:ArticleListView' page_obj.previous_page_number %}">صفحه قبل</a></li>
+          {% else %}
+          <li class="page-item disabled"><a class="page-link" href="#">صفحه قبل</a></li>
+          {% endif %}
+          
+          {% for page in paginator.page_range %}
+            
+            {% if page == page_obj.number %}
+                <li class="page-item active"><a class="page-link" href="{% url 'blog:ArticleListView' page %}">{{ page }}</a></li>
+            {% else %}
+                <li class="page-item"><a class="page-link" href="{% url 'blog:ArticleListView' page %}">{{ page }}</a></li>
+            {% endif %}
+            
+          {% endfor %}
+
+          {% if page_obj.has_next %}
+          <li class="page-item"><a class="page-link" href="{% url 'blog:ArticleListView' page_obj.next_page_number %}">صفحه بعد</a></li>
+          {% else %}
+          <li class="page-item disabled"><a class="page-link" href="#">صفحه بعد</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+{% endblock main %}

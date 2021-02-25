@@ -13,7 +13,7 @@ body{
     direction: rtl;
     text-align: right;
     font-family: Sahel;
-    font-size: 14px;
+    font-size: 20px;
 }
 
 .navbar-nav{
@@ -46,3 +46,22 @@ header.masthead .site-heading h1 {
 #mainNav {
     font-family: 'Sahel';
 }
+
+header.masthead .site-heading .subheading {
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 1.1;
+    display: block;
+    margin: 10px 0 0;
+    font-family: 'Sahel';
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 800;
+    font-family: 'Sahel';
+}
+
+header.masthead .post-heading h1 {
+    font-size: 45px;
+}
+
