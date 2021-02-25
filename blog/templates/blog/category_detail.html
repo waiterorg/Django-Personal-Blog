@@ -10,7 +10,7 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-8 col-md-10 mx-auto">
-
+       <h3 class="alert alert-primary text-center">دسته بندی در {{ category.title }}</h3>
         {% for article in category.articles.get_published_article %}
           <div class="post-preview">
             <a href="{% url 'blog:articledetail' article.slug %}">
