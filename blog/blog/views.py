@@ -5,28 +5,33 @@ from django.views.generic.list import ListView
 # Create your views here.
 
 class ArticleListView(ListView):
-    model = Article
     queryset = Article.objects.get_published_article()
     paginate_by = 2
 
 
 class ArticleDetail(DetailView):
-    
-    model = Article
 
     def get_object(self):
         slug = self.kwargs.get('slug')
-        article = Article.objects.filter(status = 'p') 
+        article = Article.objects.get_published_article()
         return get_object_or_404(article , slug=slug)
 
 
 
 
-class CategoryView(DetailView):
-    
-    model = Category
+class CategoryList(ListView):
+    paginate_by = 2
+    template_name = 'blog/category_list.html'
 
-    def get_object(self):
+    def get_queryset(self):
+        global category
         slug = self.kwargs.get('slug')
-        category = Category.objects.get_active_category()
-        return get_object_or_404(category , slug=slug)
+        category = get_object_or_404(Category.objects.get_active_category() , slug=slug)
+        return category.articles.get_published_article()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['category'] = category
+        return context
+
+    
