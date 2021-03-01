@@ -1,22 +1,29 @@
-
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-    <div class="container">
-      <a class="navbar-brand" href="{% url 'blog:ArticleListView' %}">وبلاگ جنگویی</a>
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        Menu
-        <i class="fas fa-bars"></i>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-         {% for category in categories %}
-            
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'blog:CategoryView' category.slug %}">{{ category.title }}</a>
-          </li>
+  <div class="container">
+    <a class="navbar-brand" href="{% url 'blog:ArticleListView' %}">وبلاگ جنگویی</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+      data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+      aria-label="Toggle navigation">
+      Menu
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        {% for category in categories %}
+        {% if category.parent == None %}
 
-          {% endfor %} 
-        </ul>
-      </div>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'blog:CategoryView' category.slug %}">{{ category.title }}</a>
+
+          {% if category.children.all %}
+          {% include 'shared/category_loop.html' %}
+          {% endif %}
+
+        </li>
+        {% endif %}
+        {% endfor %}
+      </ul>
     </div>
-  </nav>
+  </div>
+</nav>

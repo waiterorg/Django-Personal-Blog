@@ -1,0 +1,11 @@
+<ul class="navbar-nav ml-auto">
+    {% for category in category.children.all %}
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'blog:CategoryView' category.slug %}">{{ category.title }}</a>
+        {% if category.children.all %}
+        {% include 'shared/category_loop.html' %}
+        {% endif %}
+    </li>
+
+    {% endfor %}
+</ul>
