@@ -35,7 +35,7 @@ class CategoryAdmin(admin.ModelAdmin):
 admin.site.register(Category, CategoryAdmin)
 
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ('title','jpublish', 'jupdated', 'status',  'category_to_str')
+    list_display = ('title','thumpnail_tag','jpublish', 'jupdated', 'status',  'category_to_str')
     list_filter = ('publish', 'status')
     search_field = ('title', 'description')
     ordering = ['-status','-publish']
