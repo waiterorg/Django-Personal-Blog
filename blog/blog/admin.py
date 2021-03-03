@@ -1,5 +1,12 @@
 from django.contrib import admin
 from .models import Article , Category
+
+# Change admin site header.
+admin.site.site_header = "وبلاگ جنگویی من"
+
+
+
+
 # Register your models here.
 def make_published(self,request,queryset):
     rows_updated = queryset.update(status='p')
