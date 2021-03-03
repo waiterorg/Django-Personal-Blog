@@ -12,7 +12,7 @@
                 <h1>{{article.title}}</h1>
                 <h2 class="subheading"></h2>
                 <span class="meta"> منتشر شده توسط 
-                    <a href="#"> ویتر </a>  
+                  <a href="{% url 'blog:author' article.author %}"> {{ article.author.get_full_name }}</a>
                     در {{ article.jpublish }}  </span>
               </div>
             </div>
