@@ -9,7 +9,7 @@ from django.utils.html import format_html
 class CategoryManager(models.Manager):
     
     def get_active_category(self):
-        active = Category.objects.filter(status=True)
+        active = self.filter(status=True)
         return active
     
 
@@ -33,7 +33,7 @@ class Category(models.Model):
 class ArticleManager(models.Manager):
 
     def get_published_article(self):
-        published = Article.objects.filter(status='p') 
+        published = self.filter(status='p') 
         return published
 
 
@@ -45,7 +45,7 @@ class Article(models.Model):
         ('p','منتشر شده'),
     )
 
-    author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name='articles', verbose_name='نویسنده')
+    author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name='article', verbose_name='نویسنده')
     title = models.CharField(max_length = 150, verbose_name='عنوان')
     slug = models.SlugField(max_length= 150, unique = True , verbose_name='ادرس لینک')
     category = models.ManyToManyField(Category,related_name='articles',verbose_name='دسته بندی')
@@ -76,6 +76,7 @@ class Article(models.Model):
     def thumpnail_tag(self):
         return format_html("<img src='{}' width=95 height=75 style='border-radius: 5px;'>".format(self.thumpnail.url))
     thumpnail_tag.short_description = 'عکس مقاله'
+    
     
 
     

@@ -44,7 +44,7 @@ class AuthorList(ListView):
 		global author
 		username = self.kwargs.get('username')
 		author = get_object_or_404(User, username=username)
-		return author.articles.get_published_article()
+		return author.article.get_published_article()
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
 		context['author'] = author
