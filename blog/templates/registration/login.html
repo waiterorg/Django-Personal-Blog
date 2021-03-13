@@ -1,5 +1,5 @@
 {% load static %}
-
+{% load widget_tweaks %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -17,7 +17,15 @@
 
 	</head>
 	<body>
+		{% if form.non_field_errors %}
+		<div class="errors" >
+			{% for error in form.non_field_errors %}
+				<span>{{error}}</span>
+			{% endfor %}
+		</div>
+	{% endif %}
 	<section class="ftco-section">
+		
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-md-6 text-center mb-5">
@@ -40,13 +48,27 @@
 									</p>
 								</div>
 			      	</div>
-							<form action="#" class="signin-form">
+							<form method="POST" class="signin-form">{% csrf_token %}
 			      		<div class="form-group mt-3">
-			      			<input type="text" class="form-control" required>
+							{{form.username|add_class:"form-control"}}
+							{% if form.username.errors %}
+								<div class="errorfield" >
+									{% for error in form.username.errors %}
+										<span>{{error}}</span>
+									{% endfor %}
+								</div>
+							{% endif %}
 			      			<label class="form-control-placeholder" for="username">نام کاربری</label>
 			      		</div>
 		            <div class="form-group">
-		              <input id="password-field" type="password" class="form-control" required>
+		              {{form.password|add_class:"form-control"}}
+					  {% if form.password.errors %}
+						<div class="errorfield" >
+							{% for error in form.password.errors %}
+								<span>{{error}}</span>
+							{% endfor %}
+						</div>
+					{% endif %}
 		              <label class="form-control-placeholder" for="password">کلمه عبور</label>
 		              <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
 		            </div>

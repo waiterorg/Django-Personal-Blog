@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     #added
     'extensions',
     'django_render_partial',
+    'widget_tweaks',
     # apps
     'blog.apps.BlogConfig',
     'blog_setting.apps.BlogSettingConfig',
