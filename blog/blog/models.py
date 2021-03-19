@@ -76,6 +76,10 @@ class Article(models.Model):
     def thumpnail_tag(self):
         return format_html("<img src='{}' width=95 height=75 style='border-radius: 5px;'>".format(self.thumpnail.url))
     thumpnail_tag.short_description = 'عکس مقاله'
+
+    def category_to_str(self):
+        return " ,".join([category.title for category in self.category.get_active_category()])
+    category_to_str.short_description='دسته بندی'
     
     
 
