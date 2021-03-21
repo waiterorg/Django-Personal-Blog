@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.contrib.auth.models import User
 from django.utils import timezone
 from extensions.utils import jalali_converter
@@ -68,6 +69,9 @@ class Article(models.Model):
     def jpublish(self):
         return jalali_converter(self.publish)
     jpublish.short_description = 'تاریخ انتشار'
+
+    def get_absolute_url(self):
+        return reverse("account:home")
     
     def jupdated(self):
         return jalali_converter(self.updated)
