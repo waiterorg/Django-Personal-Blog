@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'extensions',
     'django_render_partial',
     'widget_tweaks',
+    'crispy_forms',
     # apps
     'blog.apps.BlogConfig',
     'blog_setting.apps.BlogSettingConfig',
@@ -143,3 +144,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static", "static_root")
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "static", "media_root")
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
