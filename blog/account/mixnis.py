@@ -3,9 +3,9 @@ from django.http import Http404
 class FieldsMixin():
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_superuser:
-            fields = ["author", "title", "slug", "category", "description", "thumpnail", "publish", "status"]
+            self.fields = ["author", "title", "slug", "category", "description", "thumpnail", "publish", "status"]
         elif request.user.is_author:
-            fields = ["title", "slug", "category", "description", "thumpnail", "publish",]
+            self.fields = ["title", "slug", "category", "description", "thumpnail", "publish",]
         else:
             raise Http404
         return super().dispatch(request, *args, **kwargs)
