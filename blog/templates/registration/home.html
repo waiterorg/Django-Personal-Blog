@@ -13,7 +13,7 @@
               <table class="table table-hover">
                 <thead>
                   <tr>
-                    <th>عنوان مقاله</th>
+                    <th> عنوان مقاله</th>
                     <th>تصویر مقاله</th>
                     <th>دسته بندی</th>
                     <th>نویسنده</th>
@@ -28,7 +28,7 @@
                     {% for article in object_list %}
                       <tr>
                         
-                        <td>{{ article.title }}</td>
+                        <td> <a href="{% url 'account:article-update' article.pk %}">{{ article.title }}</a></td>
                         <td><img src="{{ article.thumpnail.url }}" width="120px" alt=""></td>
                         <td>{{ article.category_to_str }}</span></td>
                         <td>{{ article.author.get_full_name }}</td>
