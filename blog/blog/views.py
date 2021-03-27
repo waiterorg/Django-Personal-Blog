@@ -3,6 +3,7 @@ from .models import Article , Category
 from account.models import User
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
+from account.mixins import AuthorAccessMixin
 # Create your views here.
 
 class ArticleListView(ListView):
@@ -17,7 +18,11 @@ class ArticleDetail(DetailView):
         article = Article.objects.get_published_article()
         return get_object_or_404(article , slug=slug)
 
+class ArticlePreview(AuthorAccessMixin, DetailView):
 
+    def get_object(self):
+        pk = self.kwargs.get('pk')
+        return get_object_or_404(Article , pk=pk)
 
 
 class CategoryList(ListView):
