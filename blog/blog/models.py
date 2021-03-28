@@ -42,8 +42,11 @@ class ArticleManager(models.Manager):
 class Article(models.Model):
     
     STATUS_CHOICES = (
-        ('d','چک نویس'),
-        ('p','منتشر شده'),
+        ('d','چک نویس'), # draft
+        ('p','منتشر شده'), #publish
+        ('i','در حال بررسی'), #investigation
+        ('b','برگشت داده شده'), #back
+
     )
 
     author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name='article', verbose_name='نویسنده')
