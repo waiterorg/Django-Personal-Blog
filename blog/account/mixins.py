@@ -6,9 +6,9 @@ from blog.models import Article
 class FieldsMixin():
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_superuser:
-            self.fields = ["author", "title", "slug", "category", "description", "thumpnail", "publish", "status"]
+            self.fields = ["author", "title", "slug", "category", "description", "thumpnail", "publish", "is_special" ,"status"]
         elif request.user.is_author:
-            self.fields = ["title", "slug", "category", "description", "thumpnail", "publish",]
+            self.fields = ["title", "slug", "category", "description", "thumpnail", "is_special" ,"publish",]
         else:
             raise Http404
         return super().dispatch(request, *args, **kwargs)

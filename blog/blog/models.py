@@ -58,6 +58,7 @@ class Article(models.Model):
     publish = models.DateTimeField(default = timezone.now,verbose_name='منتشر شده')
     created = models.DateTimeField(auto_now_add=True,verbose_name='ساخته شده')
     updated = models.DateTimeField(auto_now=True,verbose_name='بروز رسانی شده')
+    is_special = models.BooleanField(default=False, verbose_name='مقاله ویژه')
     status = models.CharField(max_length= 1,choices=STATUS_CHOICES,verbose_name='وضعیت')
     objects = ArticleManager()
 
