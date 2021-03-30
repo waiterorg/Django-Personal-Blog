@@ -16,6 +16,9 @@
             <a href="{% url 'blog:articledetail' article.slug %}">
               <h2 class="post-title">
                 {{article.title}}
+                {% if article.is_special %}
+                  <span class="badge badge-danger" style="font-size: 18px;">ویژه</span>
+                {% endif %}
               </h2>
               <h3 class="post-subtitle text-justify">
               {{ article.description|striptags|truncatewords:100 }}
