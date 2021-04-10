@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'six',
     'django_gravatar',
+    'comment',
     # apps
     'blog.apps.BlogConfig',
     'blog_setting.apps.BlogSettingConfig',

@@ -5,6 +5,7 @@ autopep8==1.5.4
 colorama==0.4.3
 distlib==0.3.0
 Django==3.1.5
+django-comments-dab==2.6.0
 django-crispy-forms==1.11.2
 django-gravatar2==1.4.4
 django-render-partial==0.4

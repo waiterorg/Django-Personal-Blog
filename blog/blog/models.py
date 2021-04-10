@@ -4,6 +4,8 @@ from account.models import User
 from django.utils import timezone
 from extensions.utils import jalali_converter
 from django.utils.html import format_html
+from django.contrib.contenttypes.fields import GenericRelation
+from comment.models import Comment
 
 
 # Create your models here.
@@ -60,6 +62,7 @@ class Article(models.Model):
     updated = models.DateTimeField(auto_now=True,verbose_name='بروز رسانی شده')
     is_special = models.BooleanField(default=False, verbose_name='مقاله ویژه')
     status = models.CharField(max_length= 1,choices=STATUS_CHOICES,verbose_name='وضعیت')
+    comments = GenericRelation(Comment)
     objects = ArticleManager()
 
     class Meta:
