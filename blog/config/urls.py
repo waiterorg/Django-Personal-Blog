@@ -15,24 +15,27 @@ Including another URLconf
 """
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
 from . import settings
 from django.conf.urls import include
-from account.views import Login
-
+from account.views import Login, Register, activate
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', Login.as_view(), name='login'),
-    path('',include('django.contrib.auth.urls')),
+    path('register/', Register.as_view(), name='register'),
+    path('activate/<uidb64>/<token>)/', activate, name='activate'),
+    path('', include('django.contrib.auth.urls')),
     path('', include('blog.urls')),
     path('', include('blog_setting.urls')),
-    path('account/',include('account.urls')),
+    path('account/', include('account.urls')),
 ]
 
 if settings.DEBUG:
     # add root static files
-    urlpatterns = urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns = urlpatterns + \
+        static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     # add media static files
-    urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns = urlpatterns + \
+        static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

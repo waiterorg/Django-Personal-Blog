@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django_render_partial',
     'widget_tweaks',
     'crispy_forms',
+    'six',
     # apps
     'blog.apps.BlogConfig',
     'blog_setting.apps.BlogSettingConfig',
