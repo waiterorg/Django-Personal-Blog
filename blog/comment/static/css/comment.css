@@ -5,7 +5,6 @@
 }
 .js-comment-content {
     font-size: 1.1rem;
-    font-family: Sahel;
 }
 .js-comment-content>.js-comment-urlhash {
     opacity: 1;
@@ -185,5 +184,8 @@ input#search-input:focus::placeholder {
 }
 .js-comment-content {
     font-size: 1.1rem;
+    font-family: Sahel;
+}
+.js-comment-content.mb-0 {
     font-family: Sahel;
 }
