@@ -5,6 +5,7 @@
 }
 .js-comment-content {
     font-size: 1.1rem;
+    font-family: Sahel;
 }
 .js-comment-content>.js-comment-urlhash {
     opacity: 1;
@@ -181,4 +182,8 @@ input#search-input:focus::placeholder {
 }
 .three-dots-dropdown > li:hover {
     background: #f1f1f1;
+}
+.js-comment-content {
+    font-size: 1.1rem;
+    font-family: Sahel;
 }
