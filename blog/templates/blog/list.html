@@ -1,5 +1,6 @@
 {% extends 'shared/base.html' %}
 {% load render_partial %}
+{% load ratings %}
 
 
 {% block main %}
@@ -20,6 +21,7 @@
                   <span class="badge badge-danger" style="font-size: 18px;">ویژه</span>
                 {% endif %}
               </h2>
+              <div>{% ratings article %}</div>
               <h3 class="post-subtitle text-justify">
               {{ article.description|striptags|truncatewords:100 }}
               </h3>

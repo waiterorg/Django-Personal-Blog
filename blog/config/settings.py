@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'six',
     'django_gravatar',
     'comment',
+    'star_ratings',
     # apps
     'blog.apps.BlogConfig',
     'blog_setting.apps.BlogSettingConfig',
@@ -163,3 +164,11 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = config('EMAIL_PORT')
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+
+#  Star rating settings:
+
+STAR_RATINGS_STAR_HEIGHT = 20
+# STAR_RATINGS_RANGE = 3
+# STAR_RATINGS_ANONYMOUS = True
+# STAR_RATINGS_RERATE = True
+# STAR_RATINGS_STAR_SPRITE = os.path.join(BASE_DIR / 'img.png')

@@ -27,6 +27,7 @@ urlpatterns = [
     path('register/', Register.as_view(), name='register'),
     path('activate/<uidb64>/<token>)/', activate, name='activate'),
     path('comment/', include('comment.urls')),
+    re_path(r'^ratings/', include('star_ratings.urls', namespace='ratings')),
     path('', include('django.contrib.auth.urls')),
     path('', include('blog.urls')),
     path('', include('blog_setting.urls')),
