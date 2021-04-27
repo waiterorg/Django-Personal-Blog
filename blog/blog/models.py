@@ -15,6 +15,9 @@ class CategoryManager(models.Manager):
         active = self.filter(status=True)
         return active
     
+class IPAddress(models.Model):
+    ip_address = models.GenericIPAddressField(verbose_name="آدرس آی پی")    
+
 
 
 class Category(models.Model):
@@ -63,6 +66,7 @@ class Article(models.Model):
     is_special = models.BooleanField(default=False, verbose_name='مقاله ویژه')
     status = models.CharField(max_length= 1,choices=STATUS_CHOICES,verbose_name='وضعیت')
     comments = GenericRelation(Comment)
+    hits = models.ManyToManyField(IPAddress, blank=True, related_name="hits", verbose_name="بازدید ها")
     objects = ArticleManager()
 
     class Meta:

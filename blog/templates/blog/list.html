@@ -22,6 +22,7 @@
                 {% endif %}
               </h2>
               <div>{% ratings article %}</div>
+              
               <h3 class="post-subtitle text-justify">
               {{ article.description|striptags|truncatewords:100 }}
               </h3>
@@ -35,6 +36,7 @@
                 <a href="{% url 'blog:CategoryView' category.slug %}">#{{ category.title }} </a> 
               {% endfor %}
             </div>
+            <div>بازدید ها :{{ article.hits.count }}</div>
           </div>
           <hr>
         {% endfor %}

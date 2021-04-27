@@ -16,7 +16,14 @@ class ArticleDetail(DetailView):
     def get_object(self):
         slug = self.kwargs.get('slug')
         article = Article.objects.get_published_article()
-        return get_object_or_404(article , slug=slug)
+        article = get_object_or_404(article , slug=slug)
+
+        ip_address = self.request.user.ip_address
+        if ip_address not in article.hits.all():
+            article.hits.add(ip_address)
+
+        return article
+
 
 class ArticlePreview(AuthorAccessMixin, DetailView):
 

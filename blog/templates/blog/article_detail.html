@@ -21,6 +21,7 @@
                   <a href="{% url 'blog:author' article.author %}"> {{ article.author.get_full_name }}</a>
                     در {{ article.jpublish }}  </span>
                     <div>{% ratings object %}</div>
+                    <div>بازدید ها :{{ object.hits.count }}</div>
               </div>
             </div>
           </div>
