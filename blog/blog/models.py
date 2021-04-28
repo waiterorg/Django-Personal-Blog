@@ -66,7 +66,7 @@ class Article(models.Model):
     is_special = models.BooleanField(default=False, verbose_name='مقاله ویژه')
     status = models.CharField(max_length= 1,choices=STATUS_CHOICES,verbose_name='وضعیت')
     comments = GenericRelation(Comment)
-    hits = models.ManyToManyField(IPAddress, blank=True, related_name="hits", verbose_name="بازدید ها")
+    hits = models.ManyToManyField(IPAddress, through="ArticleHit", blank=True, related_name="hits", verbose_name="بازدید ها")
     objects = ArticleManager()
 
     class Meta:
@@ -96,7 +96,11 @@ class Article(models.Model):
         return " ,".join([category.title for category in self.category.get_active_category()])
     category_to_str.short_description='دسته بندی'
     
-    
+class ArticleHit(models.Model):
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    ip_address = models.ForeignKey(IPAddress, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+
 
     
 
