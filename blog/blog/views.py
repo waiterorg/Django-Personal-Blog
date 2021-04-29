@@ -1,17 +1,29 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Article, Category
 from account.models import User
-from django.db.models import Count
+from django.db.models import Count, Q
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from account.mixins import AuthorAccessMixin
-
+from datetime import datetime, timedelta
 # Create your views here.
 
 
 class ArticleListView(ListView):
+    last_month = datetime.today() - timedelta(days=30)
     queryset = Article.objects.get_published_article()
     paginate_by = 2
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        last_month = datetime.today() - timedelta(days=30)
+        context['popular_articles'] = Article.objects.get_published_article().annotate(count=Count('hits', filter=Q(articlehit__created__gte=last_month))).order_by('-count', '-publish')[:5]
+        return context
+
+
+
+#Q(articlehit__year=2020)
+#Q(articlehit__month=12)
 
 
 class ArticleDetail(DetailView):
