@@ -13,7 +13,10 @@
   <div class="row">
     <div class="col-lg-8 col-md-10 mx-auto">
        {% block header %} {% endblock header %}
-       {% popular_articles %}
+        <aside>
+          {% popular_articles %}
+          {% hot_articles %}
+        </aside>
         {% for article in object_list %}
           <div class="post-preview">
             <a href="{% url 'blog:articledetail' article.slug %}">
@@ -41,6 +44,8 @@
             <div>بازدید ها :{{ article.hits.count }}</div>
           </div>
           <hr>
+        {% empty %}
+          <p>متاسفانه محتوایی برای نمایش وجود ندارد.</p>
         {% endfor %}
 
       <!-- Pager -->
