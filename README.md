@@ -1,4 +1,4 @@
-# personal-blog
+# Django-Personal-Blog
 Personal blog web application.
 
 the first personal blog from waiter.
