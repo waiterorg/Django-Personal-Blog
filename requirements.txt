@@ -5,10 +5,12 @@ autopep8==1.5.4
 colorama==0.4.3
 distlib==0.3.0
 Django==3.1.5
-django-comments-dab==2.6.0
+django-braces==1.14.0
 django-crispy-forms==1.11.2
 django-gravatar2==1.4.4
+django-model-utils==4.1.1
 django-render-partial==0.4
+django-star-ratings==0.9.1
 django-widget-tweaks==1.4.8
 filelock==3.0.12
 isort==4.3.21
@@ -21,6 +23,7 @@ python-decouple==3.4
 pytz==2020.5
 six==1.15.0
 sqlparse==0.4.1
+swapper==1.1.2.post1
 toml==0.10.1
 virtualenv==20.0.21
 wrapt==1.12.1

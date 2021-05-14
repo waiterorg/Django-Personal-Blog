@@ -1,54 +1,74 @@
 {% load comment_tags %}
 {% load i18n %}
-
-<div class="js-updated-comment {% if comment.has_flagged_state %}flagged-comment {% endif %}{% block content_wrapper_cls %}{% if has_valid_profile %}col-9 col-md-10{% else %}co-11 mx-3{% endif %}{% endblock content_wrapper_cls %}" id="{{ comment.urlhash }}">
-    {% block comment_content %}
-    {% render_content comment %}
-    {% endblock comment_content %}
-    <div class="{% block footer_wrapper_cls %}mt-2 text-muted{% endblock footer_wrapper_cls %}">
-        <small>
-            {% get_profile_url comment as profile_url %}
-            <{% if comment.user %}a{% else %}span{% endif %}
-                class="{% block username_cls %}{% endblock username_cls %}" {% if profile_url %}href="{{ profile_url }}"{% endif %}
-                title="{% if comment.user %}{% blocktrans %}view {{ comment.user }} profile{% endblocktrans %}{% else %}{% trans 'comment by anonymous user' %}{% endif %}"
-            >
-            {% if comment.user.get_full_name %}
-                {{ comment.user.get_full_name }}
-            {% else %}
-                {{ comment.user }}
-            {% endif %}
-            </{% if comment.user %}a{% else %}span{% endif %}> |
-            {% if comment.is_edited %}
-            <span class="font-italic" title="{% trans 'Edited' %}">{% blocktrans with edited_time=comment.edited|timesince %}ویرایش شده: {{ edited_time }} قبل{% endblocktrans %}</span>
-            {% else %}
-            <span class="font-italic" title="{% trans 'Posted' %}">{% blocktrans with posted_time=comment.posted|timesince %}{{ posted_time }} قبل{% endblocktrans %}</span>
-            {% endif %}
-            {% can_delete_comment comment user as can_delete %}
-            {% if comment.user == user %}
-                | {% include 'comment/comments/edit_icon.html' %}
-                {% include 'comment/comments/delete_icon.html' %}
-            {% elif can_delete %}
-                | {% include 'comment/comments/delete_icon.html' %}
-                {% if comment.is_flagged %}
-                    {% include 'comment/comments/reject_icon.html' %}
-                    {% if comment.is_edited %}
-                        {% include 'comment/comments/resolve_icon.html' %}
-                    {% endif %}
-                {% endif %}
-            {% endif %}
-            {% if comment.is_parent %}
-                {% get_replies_count comment user as reply_count %}
-                | <span class="js-reply-number {% block reply_count_cls %}text-dark{% endblock reply_count_cls %}">{{ reply_count }}</span>
-                <a class="js-reply-link {% block reply_link_cls %}btn btn-link ml-1{% endblock reply_link_cls %}" href="#">
-                    پاسخ
-                </a>
-                {% if comment.user == user and is_subscription_allowed %}
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<div class="container">
+<div class="row">
+    <div class="col-md-8">
+        <div class="media g-mb-30 media-comment">
+            <img class="d-flex g-width-50 g-height-50 rounded-circle g-mt-3 g-mr-15" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Image Description">
+            <div class="media-body u-shadow-v18 g-bg-secondary g-pa-30">
+              <div class="g-mb-15">
+                <small class="h5 g-color-gray-dark-v1 mb-0">{% get_profile_url comment as profile_url %}
+                  <{% if comment.user %}a{% else %}span{% endif %}
+                      class="{% block username_cls %}{% endblock username_cls %}" {% if profile_url %}href="{{ profile_url }}"{% endif %}
+                      title="{% if comment.user %}{% blocktrans %}view {{ comment.user }} profile{% endblocktrans %}{% else %}{% trans 'comment by anonymous user' %}{% endif %}"
+                  >
+                  {% if comment.user.get_full_name %}
+                      {{ comment.user.get_full_name }}
+                  {% else %}
+                      {{ comment.user }}
+                  {% endif %}
+                  </{% if comment.user %}a{% else %}span{% endif %}> |
+                  
+                  {% can_delete_comment comment user as can_delete %}
+                  {% if comment.user == user %}
+                       {% include 'comment/comments/edit_icon.html' %}
+                       {% include 'comment/comments/delete_icon.html' %}
+                  {% elif can_delete %}
+                      {% include 'comment/comments/delete_icon.html' %}
+                      {% if comment.is_flagged %}
+                          {% include 'comment/comments/reject_icon.html' %}
+                          {% if comment.is_edited %}
+                              {% include 'comment/comments/resolve_icon.html' %}
+                          {% endif %}
+                      {% endif %}
+                  {% endif %}
+                </small>
+                <span class="g-color-gray-dark-v4 g-font-size-12">{% if comment.is_edited %}
+                  <span class="font-italic" title="{% trans 'Edited' %}">{% blocktrans with edited_time=comment.edited|timesince %}ویرایش شده: {{ edited_time }} قبل{% endblocktrans %}</span>
+                  {% else %}
+                  <span class="font-italic" title="{% trans 'Posted' %}">{% blocktrans with posted_time=comment.posted|timesince %}{{ posted_time }} قبل{% endblocktrans %}</span>
+                  {% endif %}</span>
+              </div>
+        
+              <p>{% block comment_content %}
+                {% render_content comment %}
+                {% endblock comment_content %}</p>
+        
+              <ul class="list-inline d-sm-flex my-0">
+                <li class="list-inline-item ml-auto">
+                {% include "comment/reactions/reactions.html" with comment=comment %}
+                </li>
+                <li class="list-inline-item ml-auto">
+                  <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#!">
+                    <i class="fa fa-reply g-pos-rel g-top-1 g-mr-3"></i>
+                    {% if comment.is_parent %}
+                      {% get_replies_count comment user as reply_count %}
+                     <span class="js-reply-number {% block reply_count_cls %}text-dark{% endblock reply_count_cls %}">{{ reply_count }}</span>
+                    <a class="js-reply-link {% block reply_link_cls %}btn btn-link ml-1{% endblock reply_link_cls %}" href="#">
+                      پاسخ
+                    </a>
+                    {% if comment.user == user and is_subscription_allowed %}
                     <div class="{% block follow_icon_wrapper_cls %}d-inline ml-3{% endblock follow_icon_wrapper_cls %}">
                         {% include 'comment/follow/follow.html' with model_object=comment btnId=comment.id %}
                     </div>
-                {% endif %}
-            {% endif %}
-        </small>
-        {% include "comment/reactions/reactions.html" with comment=comment %}
+                    {% endif %}
+                    {% endif %}
+                  </a>
+                </li>
+              </ul>
+            </div>
+        </div>
     </div>
+</div>
 </div>
