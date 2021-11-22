@@ -1,13 +1,3 @@
-
-Personal blog web application.
-
-the first personal blog from waiter.
-
-for see this web application clone repository
-pip install requirements.txt
-execute this command in cmd --> 'python manage.py runserver'
-
-
 # Django-Personal-Blog
 django personal blog is a application which you can share your thought and knowledge and write articles in this webapp.
 
